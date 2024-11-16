@@ -17,8 +17,8 @@ export default function Home() {
       py={8}
     >
       <Box
-        w={['100%', '380px']}
-        h={['100%', '780px']}
+        w={['100%', '580px']}
+        h={['100%']}
         bg="white"
         borderRadius={['0', '40px']}
         boxShadow="2xl"
