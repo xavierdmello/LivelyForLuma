@@ -1,14 +1,14 @@
 "use client";
 import { signIn, signOut, useSession } from "next-auth/react";
 
-import { Button, Image } from "@chakra-ui/react";
+import { Button, Image, Select } from "@chakra-ui/react";
 import { DynamicWidget } from "@dynamic-labs/sdk-react-core";
 import { useAccount } from "wagmi";
 import { Box } from "@chakra-ui/react";
 import mapboxgl from "mapbox-gl";
 import { useReadContract } from "wagmi";
 import "mapbox-gl/dist/mapbox-gl.css";
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import abi from "../../public/abi";
 
 export const SignIn = () => {
@@ -17,6 +17,7 @@ export const SignIn = () => {
   const mapRef = useRef<mapboxgl.Map | null>(null);
   const mapContainerRef = useRef<HTMLDivElement | null>(null);
   const livelyAddress = process.env.NEXT_PUBLIC_LIVELY as `0x${string}`;
+  const [sortCategory, setSortCategory] = useState("overall");
 
   const { data: data } = useReadContract({
     address: livelyAddress,
@@ -158,13 +159,13 @@ export const SignIn = () => {
           padding="4"
         >
           <DynamicWidget />
-          <select onChange={(e) => console.log(e.target.value)}>
+          <Select onChange={(e) => setSortCategory(e.target.value)}>
             <option value="overall">Overall</option>
             <option value="food">Food</option>
             <option value="technical">Technical</option>
             <option value="networking">Networking</option>
             <option value="swag">Swag</option>
-          </select>
+          </Select>
         </Box>
 
         {/* Event List */}
