@@ -1,7 +1,7 @@
 "use client";
 import { signIn, signOut, useSession } from "next-auth/react";
 
-import { Button } from "@chakra-ui/react";
+import { Button, Image } from "@chakra-ui/react";
 import { DynamicWidget } from "@dynamic-labs/sdk-react-core";
 import { useAccount } from "wagmi";
 import { Box } from "@chakra-ui/react";
@@ -145,7 +145,8 @@ export const SignIn = () => {
           overflowY="scroll"
           width="100%"
           height="50vh" // Adjusted height for the event list
-          padding="4"
+          margin="4"
+          px="0"
         >
           {data && data
             .sort((a, b) => b.score - a.score) // Sort by highest overall scores
@@ -164,7 +165,7 @@ export const SignIn = () => {
                 cursor="pointer"
               >
                 <Box flexShrink="0">
-                  <img src={event.photo} alt={event.name} width="100px" />
+                  <Image src={event.imageUrl} alt={event.name} width="100px" />
                 </Box>
                 <Box marginLeft="4">
                   <Box fontWeight="bold" as="h3">
