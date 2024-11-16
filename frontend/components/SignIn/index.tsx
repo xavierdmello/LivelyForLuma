@@ -150,49 +150,69 @@ export const SignIn = () => {
         height="100vh"
         overflow="hidden"
       >
-        {/* Dynamic Widget */}
-        <DynamicWidget />
+        {/* Dynamic Widget and Select */}
+        <Box display="flex" justifyContent="space-between" width="100%" padding="4">
+          <DynamicWidget />
+          <select onChange={(e) => console.log(e.target.value)}>
+            <option value="overall">Overall</option>
+            <option value="food">Food</option>
+            <option value="technical">Technical</option>
+            <option value="networking">Networking</option>
+            <option value="swag">Swag</option>
+          </select>
+        </Box>
 
         {/* Event List */}
-        <Box
-          overflowY="auto"
-          width="100%"
-          height="100%"
-          margin="4"
-          px="0"
-        >
-          {data && data
-            .sort((a, b) => b.score - a.score)
-            .map((event, index) => (
-              <Box
-                id={`event-${index}`}
-                key={event.id}
-                display="flex"
-                flexDirection="row"
-                alignItems="center"
-                borderWidth="1px"
-                borderRadius="lg"
-                overflow="hidden"
-                marginBottom="4"
-                padding="4"
-                onClick={() => window.open(event.lumaLink, "_blank")}
-                cursor="pointer"
-              >
-                <Box flexShrink="0">
-                  <Image src={event.imageUrl} alt={event.name} width="100px" />
-                </Box>
-                <Box marginLeft="4" width="100%">
-                  <Box fontWeight="bold" as="h3" marginBottom="2" width="100%">
-                    {index + 1}. {event.name}
+        <Box overflowY="auto" width="100%" height="100%" margin="4" px="0">
+          {data &&
+            data
+              .sort((a, b) => b.score - a.score)
+              .map((event, index) => (
+                <Box
+                  id={`event-${index}`}
+                  key={event.id}
+                  display="flex"
+                  flexDirection="row"
+                  alignItems="center"
+                  borderWidth="1px"
+                  borderRadius="lg"
+                  overflow="hidden"
+                  marginBottom="4"
+                  padding="4"
+                  onClick={() => window.open(event.lumaLink, "_blank")}
+                  cursor="pointer"
+                >
+                  <Box flexShrink="0">
+                    <Image
+                      src={event.imageUrl}
+                      alt={event.name}
+                      width="100px"
+                    />
                   </Box>
-                  <Box display="flex" justifyContent="space-between" color="gray.500" fontSize="sm" marginBottom="2">
-                    <Box>{event.venue}</Box>
-                    <Box marginLeft="auto" paddingLeft="2">{event.time}</Box>
+                  <Box marginLeft="4" width="100%">
+                    <Box
+                      fontWeight="bold"
+                      as="h3"
+                      marginBottom="2"
+                      width="100%"
+                    >
+                      {index + 1}. {event.name}
+                    </Box>
+                    <Box
+                      display="flex"
+                      justifyContent="space-between"
+                      color="gray.500"
+                      fontSize="sm"
+                      marginBottom="2"
+                    >
+                      <Box>{event.venue}</Box>
+                      <Box marginLeft="auto" paddingLeft="2">
+                        {event.time}
+                      </Box>
+                    </Box>
                   </Box>
-        
                 </Box>
-              </Box>
-            ))}
+              ))}
         </Box>
 
         {/* Map Container */}
