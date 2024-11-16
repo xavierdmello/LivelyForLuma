@@ -1,12 +1,46 @@
+import { Box, chakra, Container } from "@chakra-ui/react";
 import { PayBlock } from "@/components/Pay";
 import { SignIn } from "@/components/SignIn";
 import { VerifyBlock } from "@/components/Verify";
+import NextImage from "next/image";
+import { Image as ChakraImage } from "@chakra-ui/react";
 
 export default function Home() {
   return (
-    <main className="flex min-h-screen flex-col items-center justify-center p-24 gap-y-3">
-      <SignIn />
-  
-    </main>
+    <Container 
+      maxW="100vw" 
+      h="100vh" 
+      bg="gray.50" 
+      centerContent 
+      py={8}
+    >
+      <Box
+        w={['100%', '380px']}
+        h={['100%', '780px']}
+        bg="white"
+        borderRadius={['0', '40px']}
+        boxShadow="2xl"
+        overflow="hidden"
+        position="relative"
+        border={['none', '8px solid']}
+        borderColor="gray.300"
+      > 
+        <Box display="flex" justifyContent="center">
+          <ChakraImage asChild margin={4}>
+            <NextImage src="/lively.png" alt="notch" width={100} height={25} />
+        </ChakraImage>
+
+          </Box>
+
+        <Box 
+          h="100%" 
+          overflowY="auto" 
+          px={4} 
+          pt={[4, 8]}
+        >
+          <SignIn />
+        </Box>
+      </Box>
+    </Container>
   );
 }
