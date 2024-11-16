@@ -181,11 +181,15 @@ export const SignIn = () => {
                 <Box flexShrink="0">
                   <Image src={event.imageUrl} alt={event.name} width="100px" />
                 </Box>
-                <Box marginLeft="4">
-                  <Box fontWeight="bold" as="h3">
+                <Box marginLeft="4" width="100%">
+                  <Box fontWeight="bold" as="h3" marginBottom="2" width="100%">
                     {index + 1}. {event.name}
                   </Box>
-                  <Box>{event.location}</Box>
+                  <Box display="flex" justifyContent="space-between" color="gray.500" fontSize="sm" marginBottom="2">
+                    <Box>{event.venue}</Box>
+                    <Box marginLeft="auto" paddingLeft="2">{event.time}</Box>
+                  </Box>
+        
                 </Box>
               </Box>
             ))}
