@@ -5,7 +5,7 @@ import "./globals.css";
 import MiniKitProvider from "@/components/minikit-provider";
 import dynamic from "next/dynamic";
 import NextAuthProvider from "@/components/next-auth-provider";
-import { ChakraProvider, defaultSystem } from "@chakra-ui/react"
+import { ChakraProvider } from "@chakra-ui/react"
 import {
   DynamicContextProvider,
   DynamicWidget,
@@ -48,7 +48,7 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <NextAuthProvider>
-      <ChakraProvider value={defaultSystem}>
+      <ChakraProvider>
         <ErudaProvider>
 
           <MiniKitProvider>
