@@ -41,6 +41,8 @@ export const SignIn = () => {
             dragPan: false
           });
 
+          mapRef.current.scrollZoom.disable();
+
           mapRef.current.addControl(
             new mapboxgl.GeolocateControl({
               positionOptions: {
@@ -87,6 +89,8 @@ export const SignIn = () => {
             zoom: 11.12,
             dragPan: false
           });
+
+          mapRef.current.scrollZoom.disable();
 
           mapRef.current.addControl(
             new mapboxgl.GeolocateControl({

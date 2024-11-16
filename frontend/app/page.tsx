@@ -26,6 +26,8 @@ export default function Home() {
         position="relative"
         border={['none', '8px solid']}
         borderColor="gray.300"
+        display="flex"
+        flexDirection="column"
       > 
         <Box display="flex" justifyContent="center" mb={0} pb={0}>
           <ChakraImage asChild margin={4} mb={2} pb={0}>
@@ -38,9 +40,11 @@ export default function Home() {
           h="100%" 
           overflowY="auto" 
           px={4} 
-         
+          flex="1"
+          display="flex"
+          flexDirection="column"
+          justifyContent="space-between"
         >
-          
           <SignIn />
         </Box>
       </Box>
