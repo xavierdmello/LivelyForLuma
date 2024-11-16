@@ -1,20 +1,39 @@
 "use client";
 import { signIn, signOut, useSession } from "next-auth/react";
-import { Button } from "@/components/ui/button";
+
+import { Button } from "@chakra-ui/react"
+import { DynamicWidget } from "@dynamic-labs/sdk-react-core";
+import { useAccount } from "wagmi";
+import {Box} from "@chakra-ui/react";
 export const SignIn = () => {
-  const { data: session } = useSession();
-  if (session) {
-    return (
-      <>
-        Signed in as {session?.user?.name?.slice(0, 10)} <br />
-        <button onClick={() => signOut()}>Sign out</button>
-      </>
-    );
-  } else {
-    return (
-      <>
-        <Button variant="surface" onClick={() => signIn()}>Sign in</Button>
-      </>
-    );
-  }
+const { address, isConnected, chain } = useAccount();
+
+return (
+  <>  
+   <DynamicWidget />
+   <Button colorScheme="red.500" variant="surface" padding="5px" onClick={() => signIn()}>Sign in With Worldcoin</Button>
+
+ 
+
+  </>
+)
+  
 };
+
+function SignInThingy() {
+  return (
+    <Box 
+      width="100%" 
+      height="100%" 
+      display="flex" 
+      justifyContent="center" 
+      alignItems="center"
+      margin="2rem"
+    >
+      <Box>
+
+        
+      </Box>
+    </Box>
+  )
+}

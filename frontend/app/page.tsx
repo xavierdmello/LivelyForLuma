@@ -25,8 +25,8 @@ export default function Home() {
         border={['none', '8px solid']}
         borderColor="gray.300"
       > 
-        <Box display="flex" justifyContent="center">
-          <ChakraImage asChild margin={4}>
+        <Box display="flex" justifyContent="center" mb={0} pb={0}>
+          <ChakraImage asChild margin={4} mb={2} pb={0}>
             <NextImage src="/lively.png" alt="notch" width={100} height={25} />
         </ChakraImage>
 
@@ -36,7 +36,7 @@ export default function Home() {
           h="100%" 
           overflowY="auto" 
           px={4} 
-          pt={[4, 8]}
+         
         >
           <SignIn />
         </Box>
