@@ -1,30 +1,33 @@
 // SPDX-License-Identifier: UNLICENSED
 pragma solidity ^0.8.13;
 
+struct Stats {
+    int8 overall;
+    int8 food;
+    int8 technical;
+    int8 networking;
+    int8 fun;
+    int8 swag;
+}
+
+struct Event {
+    string name;
+    string host;
+    string venue;
+    string imageUrl;
+    string lumaLink;
+    uint256 start;
+    uint256 end;
+    int long;
+    int lat;
+    Stats stats;
+}
+
 contract Lively {
     Event[] public events;
+
     // Check if a user has already rated event
     mapping (uint256 => mapping (address => bool)) public hasRated;
-
-    struct Event {
-        string name;
-        string host;
-        string venue;
-        string imageUrl;
-        string lumaLink;
-        uint256 start;
-        uint256 end;
-        Stats stats;
-    }
-
-    struct Stats {
-        int8 overall;
-        int8 food;
-        int8 technical;
-        int8 networking;
-        int8 fun;
-        int8 swag;
-    }
 
     function createEvent(
         string memory _name,
@@ -33,7 +36,9 @@ contract Lively {
         string memory _imageUrl,
         string memory _lumaLink,
         uint256 _start,
-        uint256 _end
+        uint256 _end,
+        int _long,
+        int _lat
     ) public {
         Stats memory initialStats = Stats(0, 0, 0, 0, 0, 0);
         
@@ -45,40 +50,10 @@ contract Lively {
             lumaLink: _lumaLink,
             start: _start,
             end: _end,
+            long: _long,
+            lat: _lat,
             stats: initialStats
         }));
-    }
-
-    function createEvents(
-        string[] memory _names,
-        string[] memory _hosts,
-        string[] memory _venues,
-        string[] memory _imageUrls,
-        string[] memory _lumaLinks,
-        uint256[] memory _starts,
-        uint256[] memory _ends
-    ) public {
-        require(
-            _names.length == _venues.length &&
-            _venues.length == _imageUrls.length &&
-            _imageUrls.length == _lumaLinks.length &&
-            _lumaLinks.length == _starts.length &&
-            _starts.length == _ends.length &&
-            _hosts.length == _names.length,
-            "Array lengths must match"
-        );
-
-        for (uint i = 0; i < _names.length; i++) {
-            createEvent(
-                _names[i],
-                _hosts[i],
-                _venues[i],
-                _imageUrls[i],
-                _lumaLinks[i],
-                _starts[i],
-                _ends[i]
-            );
-        }
     }
 
     // Vote types: 1 for upvote, 2 for downvote, 0 for no vote
