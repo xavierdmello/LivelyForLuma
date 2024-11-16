@@ -25,7 +25,7 @@
   background-color: blue;
   border-radius: 50%;
   position: relative;
-  z-index: 10;
+  z-index: 1;
 }
 
 .user-location-marker::before {

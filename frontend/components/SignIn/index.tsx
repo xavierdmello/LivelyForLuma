@@ -37,7 +37,8 @@ export const SignIn = () => {
             container: mapContainerRef.current as HTMLElement,
             style: "mapbox://styles/mapbox/streets-v12",
             center: [longitude, latitude],
-            zoom: 10.12,
+            zoom: 11.12,
+            dragPan: false
           });
 
           mapRef.current.addControl(
@@ -65,8 +66,11 @@ export const SignIn = () => {
               const marker = new mapboxgl.Marker()
                 .setLngLat([parseFloat(event.long), parseFloat(event.lat)])
                 .setPopup(
-                  new mapboxgl.Popup({ offset: 25 }).setHTML(
-                    `<h3>${event.name}</h3><a href="${event.lumaLink}" target="_blank">View Event</a>`
+                  new mapboxgl.Popup({ 
+                    offset: [0, -15],  // Offset popup above the marker
+                    anchor: 'bottom'    // Anchor popup to bottom
+                  }).setHTML(
+                    `<h3>${event.name}</h3><a href="${event.lumaLink}" target="_blank" style="color: #E91E63;">View Event</a>`
                   )
                 )
                 .addTo(mapRef.current!);
@@ -80,7 +84,8 @@ export const SignIn = () => {
             container: mapContainerRef.current as HTMLElement,
             style: "mapbox://styles/mapbox/streets-v12",
             center: [-74.0242, 40.6941],
-            zoom: 10.12,
+            zoom: 11.12,
+            dragPan: false
           });
 
           mapRef.current.addControl(
@@ -93,14 +98,17 @@ export const SignIn = () => {
             })
           );
 
-          // Add markers if data is available
+          // Add markers if data is available (in error callback)
           if (data) {
             data.forEach((event) => {
               const marker = new mapboxgl.Marker()
                 .setLngLat([parseFloat(event.long), parseFloat(event.lat)])
                 .setPopup(
-                  new mapboxgl.Popup({ offset: 25 }).setHTML(
-                    `<h3>${event.name}</h3><a href="${event.lumaLink}" target="_blank">View Event</a>`
+                  new mapboxgl.Popup({ 
+                    offset: [0, -15],
+                    anchor: 'bottom'
+                  }).setHTML(
+                    `<h3>${event.name}</h3><a href="${event.lumaLink}" target="_blank" style="color: #E91E63;">View Event</a>`
                   )
                 )
                 .addTo(mapRef.current!);
