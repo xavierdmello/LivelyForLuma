@@ -156,7 +156,7 @@ export const SignIn = () => {
         <Box
           overflowY="scroll"
           width="100%"
-          height="50vh" // Adjusted height for the event list
+          height="80%" // Adjusted height for the event list
           margin="4"
           px="0"
         >
@@ -195,7 +195,7 @@ export const SignIn = () => {
           id="map-container"
           ref={mapContainerRef}
           width="100%"
-          height="20vh" // Shorter height for the map
+          height="15%" // Shorter height for the map
           borderRadius="lg"
           borderWidth="1px"
           margin="4"
