@@ -172,7 +172,7 @@ export const SignIn = () => {
           {data &&
             data
               // @ts-ignore: Suppress implicit 'any' type error
-              .sort((a, b) => b.score - a.score)
+              .sort((a, b) => b.stats.overall - a.stats.overall)
               // @ts-ignore: Suppress implicit 'any' type error
               .map((event, index) => (
                 <Box
