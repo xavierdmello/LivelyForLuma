@@ -133,22 +133,14 @@ export const SignIn = () => {
         width="100%"
         height="100vh"
       >
-        {session && (
-          <Button
-            colorScheme="red.500"
-            variant="surface"
-            padding="5px"
-            onClick={() => signIn()}
-          >
-            Sign in With Worldcoin
-          </Button>
-        )}
+        {/* Dynamic Widget */}
+        <DynamicWidget />
 
         {/* Event List */}
         <Box
           overflowY="scroll"
           width="100%"
-          height="66.67vh" // Top 2/3 of the screen
+          height="50vh" // Adjusted height for the event list
           padding="4"
         >
           {data && data
@@ -185,7 +177,7 @@ export const SignIn = () => {
           id="map-container"
           ref={mapContainerRef}
           width="100%"
-          height="33.33vh" // Bottom 1/3 of the screen
+          height="20vh" // Shorter height for the map
           borderRadius="lg"
           borderWidth="1px"
           margin="4"
