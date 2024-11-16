@@ -64,18 +64,24 @@ export const SignIn = () => {
 
           // Add markers if data is available
           if (data) {
-            data.forEach((event) => {
+            data.forEach((event, index) => {
               const marker = new mapboxgl.Marker()
                 .setLngLat([parseFloat(event.long), parseFloat(event.lat)])
                 .setPopup(
                   new mapboxgl.Popup({ 
-                    offset: [0, -15],  // Offset popup above the marker
-                    anchor: 'bottom'    // Anchor popup to bottom
+                    offset: [0, -15],
+                    anchor: 'bottom'
                   }).setHTML(
                     `<h3>${event.name}</h3><a href="${event.lumaLink}" target="_blank" style="color: #E91E63;">View Event</a>`
                   )
                 )
                 .addTo(mapRef.current!);
+
+              // Add click event to scroll to the respective event in the list
+              marker.getElement().addEventListener('click', () => {
+                const eventElement = document.getElementById(`event-${index}`);
+                eventElement?.scrollIntoView({ behavior: 'smooth' });
+              });
             });
           }
         },
@@ -104,7 +110,7 @@ export const SignIn = () => {
 
           // Add markers if data is available (in error callback)
           if (data) {
-            data.forEach((event) => {
+            data.forEach((event, index) => {
               const marker = new mapboxgl.Marker()
                 .setLngLat([parseFloat(event.long), parseFloat(event.lat)])
                 .setPopup(
@@ -116,6 +122,12 @@ export const SignIn = () => {
                   )
                 )
                 .addTo(mapRef.current!);
+
+              // Add click event to scroll to the respective event in the list
+              marker.getElement().addEventListener('click', () => {
+                const eventElement = document.getElementById(`event-${index}`);
+                eventElement?.scrollIntoView({ behavior: 'smooth' });
+              });
             });
           }
         }
@@ -150,8 +162,9 @@ export const SignIn = () => {
         >
           {data && data
             .sort((a, b) => b.score - a.score) // Sort by highest overall scores
-            .map((event) => (
+            .map((event, index) => (
               <Box
+                id={`event-${index}`}
                 key={event.id}
                 display="flex"
                 flexDirection="row"
@@ -169,7 +182,7 @@ export const SignIn = () => {
                 </Box>
                 <Box marginLeft="4">
                   <Box fontWeight="bold" as="h3">
-                    {event.name}
+                    {index + 1}. {event.name}
                   </Box>
                   <Box>{event.location}</Box>
                 </Box>
