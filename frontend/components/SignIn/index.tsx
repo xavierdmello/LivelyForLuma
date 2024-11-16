@@ -69,7 +69,7 @@ export const SignIn = () => {
                     `<h3>${event.name}</h3><a href="${event.lumaLink}" target="_blank">View Event</a>`
                   )
                 )
-                .addTo(mapRef.current);
+                .addTo(mapRef.current!);
             });
           }
         },
@@ -103,7 +103,7 @@ export const SignIn = () => {
                     `<h3>${event.name}</h3><a href="${event.lumaLink}" target="_blank">View Event</a>`
                   )
                 )
-                .addTo(mapRef.current);
+                .addTo(mapRef.current!);
             });
           }
         }
