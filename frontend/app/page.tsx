@@ -4,6 +4,8 @@ import { SignIn } from "@/components/SignIn";
 import { VerifyBlock } from "@/components/Verify";
 import NextImage from "next/image";
 import { Image as ChakraImage } from "@chakra-ui/react";
+import 'mapbox-gl/dist/mapbox-gl.css';
+import mapboxgl from 'mapbox-gl'
 
 export default function Home() {
   return (
@@ -38,6 +40,7 @@ export default function Home() {
           px={4} 
          
         >
+          
           <SignIn />
         </Box>
       </Box>
