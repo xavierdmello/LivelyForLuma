@@ -7,11 +7,15 @@ import { useAccount } from "wagmi";
 import {Box} from "@chakra-ui/react";
 export const SignIn = () => {
 const { address, isConnected, chain } = useAccount();
-
+const { data: session } = useSession();
 return (
   <>  
-   <DynamicWidget />
-   <Button colorScheme="red.500" variant="surface" padding="5px" onClick={() => signIn()}>Sign in With Worldcoin</Button>
+      <Box display="flex" justifyContent="center" alignItems="center" width="100%">
+   {!session && <Button colorScheme="red.500" variant="surface" padding="5px" onClick={() => signIn()}>Sign in With Worldcoin</Button>}
+   </Box>
+   {session && <DynamicWidget />}
+   
+
 
  
 
