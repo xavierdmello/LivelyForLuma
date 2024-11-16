@@ -127,9 +127,11 @@ export const SignIn = () => {
     <>
       <Box
         display="flex"
+        flexDirection="column"
         justifyContent="center"
         alignItems="center"
         width="100%"
+        height="100vh"
       >
         {session && (
           <Button
@@ -141,9 +143,55 @@ export const SignIn = () => {
             Sign in With Worldcoin
           </Button>
         )}
+
+        {/* Event List */}
+        <Box
+          overflowY="scroll"
+          width="100%"
+          height="66.67vh" // Top 2/3 of the screen
+          padding="4"
+        >
+          {data && data
+            .sort((a, b) => b.score - a.score) // Sort by highest overall scores
+            .map((event) => (
+              <Box
+                key={event.id}
+                display="flex"
+                flexDirection="row"
+                alignItems="center"
+                borderWidth="1px"
+                borderRadius="lg"
+                overflow="hidden"
+                marginBottom="4"
+                padding="4"
+                onClick={() => window.open(event.lumaLink, "_blank")}
+                cursor="pointer"
+              >
+                <Box flexShrink="0">
+                  <img src={event.photo} alt={event.name} width="100px" />
+                </Box>
+                <Box marginLeft="4">
+                  <Box fontWeight="bold" as="h3">
+                    {event.name}
+                  </Box>
+                  <Box>{event.location}</Box>
+                </Box>
+              </Box>
+            ))}
+        </Box>
+
+        {/* Map Container */}
+        <Box
+          id="map-container"
+          ref={mapContainerRef}
+          width="100%"
+          height="33.33vh" // Bottom 1/3 of the screen
+          borderRadius="lg"
+          borderWidth="1px"
+          margin="4"
+          padding="4"
+        />
       </Box>
-      {!session && <DynamicWidget />}
-      {!session && <div id="map-container" ref={mapContainerRef} />}
     </>
   );
 };
