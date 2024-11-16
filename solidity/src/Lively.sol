@@ -16,10 +16,9 @@ struct Event {
     string venue;
     string imageUrl;
     string lumaLink;
-    uint256 start;
-    uint256 end;
-    int long;
-    int lat;
+    string time;
+    string long;
+    string lat;
     Stats stats;
 }
 
@@ -29,30 +28,30 @@ contract Lively {
     // Check if a user has already rated event
     mapping (uint256 => mapping (address => bool)) public hasRated;
 
+    // User's event prefrences
+    mapping (address => string) public userPref;
+
     function createEvent(
         string memory _name,
         string memory _host,
         string memory _venue,
         string memory _imageUrl,
         string memory _lumaLink,
-        uint256 _start,
-        uint256 _end,
-        int _long,
-        int _lat
+        string memory _time,
+        string memory _long,
+        string memory _lat,
+        Stats memory _stats
     ) public {
-        Stats memory initialStats = Stats(0, 0, 0, 0, 0, 0);
-        
         events.push(Event({
             name: _name,
             host: _host,
             venue: _venue,
             imageUrl: _imageUrl,
             lumaLink: _lumaLink,
-            start: _start,
-            end: _end,
+            time: _time,
             long: _long,
             lat: _lat,
-            stats: initialStats
+            stats: _stats
         }));
     }
 
@@ -102,8 +101,16 @@ contract Lively {
         hasRated[eventId][msg.sender] = true;
     }
 
+    function setUserPref(string memory pref) public {
+        userPref[msg.sender] = pref;
+    }
+
     // Verify user is checked into event in Luma (eg. they actually attended). Placeholder. Assuming we had access to the Luma API which is $70/mo :(
     function verifyAttendance(uint256 eventId, address user) public returns (bool) {
         return true;
     }   
+
+    function getAllEvents() public view returns (Event[] memory) {
+        return events;
+    }
 }
