@@ -23,7 +23,7 @@ export const SignIn = () => {
     abi: abi,
     functionName: "getAllEvents",
   });
-  
+
   useEffect(() => {
     if (mapContainerRef.current) {
       mapboxgl.accessToken =
@@ -38,7 +38,7 @@ export const SignIn = () => {
             style: "mapbox://styles/mapbox/streets-v12",
             center: [longitude, latitude],
             zoom: 11.12,
-            dragPan: false
+            dragPan: false,
           });
 
           mapRef.current.scrollZoom.disable();
@@ -54,8 +54,8 @@ export const SignIn = () => {
           );
 
           // Create a custom marker element for the user's current location
-          const userLocationMarker = document.createElement('div');
-          userLocationMarker.className = 'user-location-marker';
+          const userLocationMarker = document.createElement("div");
+          userLocationMarker.className = "user-location-marker";
 
           // Add the custom marker to the map
           new mapboxgl.Marker(userLocationMarker)
@@ -68,9 +68,9 @@ export const SignIn = () => {
               const marker = new mapboxgl.Marker()
                 .setLngLat([parseFloat(event.long), parseFloat(event.lat)])
                 .setPopup(
-                  new mapboxgl.Popup({ 
+                  new mapboxgl.Popup({
                     offset: [0, -15],
-                    anchor: 'bottom'
+                    anchor: "bottom",
                   }).setHTML(
                     `<h3>${event.name}</h3><a href="${event.lumaLink}" target="_blank" style="color: #E91E63;">View Event</a>`
                   )
@@ -78,9 +78,9 @@ export const SignIn = () => {
                 .addTo(mapRef.current!);
 
               // Add click event to scroll to the respective event in the list
-              marker.getElement().addEventListener('click', () => {
+              marker.getElement().addEventListener("click", () => {
                 const eventElement = document.getElementById(`event-${index}`);
-                eventElement?.scrollIntoView({ behavior: 'smooth' });
+                eventElement?.scrollIntoView({ behavior: "smooth" });
               });
             });
           }
@@ -93,7 +93,7 @@ export const SignIn = () => {
             style: "mapbox://styles/mapbox/streets-v12",
             center: [-74.0242, 40.6941],
             zoom: 11.12,
-            dragPan: false
+            dragPan: false,
           });
 
           mapRef.current.scrollZoom.disable();
@@ -114,9 +114,9 @@ export const SignIn = () => {
               const marker = new mapboxgl.Marker()
                 .setLngLat([parseFloat(event.long), parseFloat(event.lat)])
                 .setPopup(
-                  new mapboxgl.Popup({ 
+                  new mapboxgl.Popup({
                     offset: [0, -15],
-                    anchor: 'bottom'
+                    anchor: "bottom",
                   }).setHTML(
                     `<h3>${event.name}</h3><a href="${event.lumaLink}" target="_blank" style="color: #E91E63;">View Event</a>`
                   )
@@ -124,9 +124,9 @@ export const SignIn = () => {
                 .addTo(mapRef.current!);
 
               // Add click event to scroll to the respective event in the list
-              marker.getElement().addEventListener('click', () => {
+              marker.getElement().addEventListener("click", () => {
                 const eventElement = document.getElementById(`event-${index}`);
-                eventElement?.scrollIntoView({ behavior: 'smooth' });
+                eventElement?.scrollIntoView({ behavior: "smooth" });
               });
             });
           }
@@ -151,7 +151,12 @@ export const SignIn = () => {
         overflow="hidden"
       >
         {/* Dynamic Widget and Select */}
-        <Box display="flex" justifyContent="space-between" width="100%" padding="4">
+        <Box
+          display="flex"
+          justifyContent="space-between"
+          width="100%"
+          padding="4"
+        >
           <DynamicWidget />
           <select onChange={(e) => console.log(e.target.value)}>
             <option value="overall">Overall</option>
@@ -166,7 +171,9 @@ export const SignIn = () => {
         <Box overflowY="auto" width="100%" height="100%" margin="4" px="0">
           {data &&
             data
+              // @ts-ignore: Suppress implicit 'any' type error
               .sort((a, b) => b.score - a.score)
+              // @ts-ignore: Suppress implicit 'any' type error
               .map((event, index) => (
                 <Box
                   id={`event-${index}`}
