@@ -9,6 +9,7 @@ import mapboxgl from 'mapbox-gl'
 import { useReadContract } from 'wagmi'
 import 'mapbox-gl/dist/mapbox-gl.css';
 import { useEffect, useRef } from "react";
+import abi from '../../public/abi'
 
 export const SignIn = () => {
 const { address, isConnected, chain } = useAccount();
@@ -19,17 +20,12 @@ const livelyAddress = process.env.NEXT_PUBLIC_LIVELY as `0x${string}`;
 
 const {data: data} = useReadContract({
   address: livelyAddress,
-  abi: [],
-  functionName: 'getBalance',
-  args: [address]
+  abi: abi,
+  functionName: 'getAllEvents',
 })
 
 useEffect(() => {
-  
-
-
-
-  
+  console.log(data)
   if (mapContainerRef.current) {
     mapboxgl.accessToken = 'pk.eyJ1IjoidGFjb2NhdDQ2NDIiLCJhIjoiY20za280d2Z4MGd1azJrczcxMmFuajBueCJ9.LHliYmwenOrUXMiEtWLGxQ';
 
