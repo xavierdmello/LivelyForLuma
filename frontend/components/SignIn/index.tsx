@@ -148,20 +148,21 @@ export const SignIn = () => {
         alignItems="center"
         width="100%"
         height="100vh"
+        overflow="hidden"
       >
         {/* Dynamic Widget */}
         <DynamicWidget />
 
         {/* Event List */}
         <Box
-          overflowY="scroll"
+          overflowY="auto"
           width="100%"
-          height="80%" // Adjusted height for the event list
+          height="100%"
           margin="4"
           px="0"
         >
           {data && data
-            .sort((a, b) => b.score - a.score) // Sort by highest overall scores
+            .sort((a, b) => b.score - a.score)
             .map((event, index) => (
               <Box
                 id={`event-${index}`}
@@ -195,11 +196,12 @@ export const SignIn = () => {
           id="map-container"
           ref={mapContainerRef}
           width="100%"
-          height="15%" // Shorter height for the map
+          height="30%"
           borderRadius="lg"
           borderWidth="1px"
           margin="4"
           padding="4"
+          overflow="hidden"
         />
       </Box>
     </>
