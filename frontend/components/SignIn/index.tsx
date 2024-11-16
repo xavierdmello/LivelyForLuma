@@ -50,6 +50,16 @@ export const SignIn = () => {
             })
           );
 
+          // Create a custom marker element for the user's current location
+          const userLocationMarker = document.createElement('div');
+          userLocationMarker.className = 'user-location-marker';
+
+          // Add the custom marker to the map
+          new mapboxgl.Marker(userLocationMarker)
+            .setLngLat([longitude, latitude])
+            .addTo(mapRef.current);
+
+          // Add markers if data is available
           if (data) {
             data.forEach((event) => {
               const marker = new mapboxgl.Marker()
@@ -83,6 +93,7 @@ export const SignIn = () => {
             })
           );
 
+          // Add markers if data is available
           if (data) {
             data.forEach((event) => {
               const marker = new mapboxgl.Marker()
