@@ -1,7 +1,7 @@
 "use client";
 import { signIn, signOut, useSession } from "next-auth/react";
 
-import { Button, Image, Select } from "@chakra-ui/react";
+import { Button, Image, Select, Tooltip, Progress } from "@chakra-ui/react";
 import { DynamicWidget } from "@dynamic-labs/sdk-react-core";
 import { useAccount } from "wagmi";
 import { Box } from "@chakra-ui/react";
@@ -190,50 +190,68 @@ export const SignIn = () => {
               })
               // @ts-ignore: Suppress implicit 'any' type error
               .map((event, index) => (
-                <Box
-                  id={`event-${index}`}
-                  key={event.id}
-                  display="flex"
-                  flexDirection="row"
-                  alignItems="center"
-                  borderWidth="1px"
-                  borderRadius="lg"
-                  overflow="hidden"
-                  marginBottom="4"
-                  padding="4"
-                  onClick={() => window.open(event.lumaLink, "_blank")}
-                  cursor="pointer"
-                >
-                  <Box flexShrink="0">
-                    <Image
-                      src={event.imageUrl}
-                      alt={event.name}
-                      width="100px"
-                    />
-                  </Box>
-                  <Box marginLeft="4" width="100%">
-                    <Box
-                      fontWeight="bold"
-                      as="h3"
-                      marginBottom="2"
-                      width="100%"
-                    >
-                      {index + 1}. {event.name}
+                <Tooltip
+                  label={
+                    <Box>
+                      <Box>Food: <Progress value={event.stats.food} size="xs" colorScheme="pink" /></Box>
+                      <Box>Technical: <Progress value={event.stats.technical} size="xs" colorScheme="blue" /></Box>
+                      <Box>Networking: <Progress value={event.stats.networking} size="xs" colorScheme="green" /></Box>
+                      <Box>Swag: <Progress value={event.stats.swag} size="xs" colorScheme="purple" /></Box>
+                      <Box>Overall: <Progress value={event.stats.overall} size="xs" colorScheme="orange" /></Box>
                     </Box>
-                    <Box
-                      display="flex"
-                      justifyContent="space-between"
-                      color="gray.500"
-                      fontSize="sm"
-                      marginBottom="2"
-                    >
-                      <Box>{event.venue}</Box>
-                      <Box marginLeft="auto" paddingLeft="2">
-                        {event.time}
+                  }
+                  placement="top"
+                  hasArrow
+                  bg="white"
+                  color="black"
+                  borderRadius="md"
+                  p="2"
+                >
+                  <Box
+                    id={`event-${index}`}
+                    key={event.id}
+                    display="flex"
+                    flexDirection="row"
+                    alignItems="center"
+                    borderWidth="1px"
+                    borderRadius="lg"
+                    overflow="hidden"
+                    marginBottom="4"
+                    padding="4"
+                    onClick={() => window.open(event.lumaLink, "_blank")}
+                    cursor="pointer"
+                  >
+                    <Box flexShrink="0">
+                      <Image
+                        src={event.imageUrl}
+                        alt={event.name}
+                        width="100px"
+                      />
+                    </Box>
+                    <Box marginLeft="4" width="100%">
+                      <Box
+                        fontWeight="bold"
+                        as="h3"
+                        marginBottom="2"
+                        width="100%"
+                      >
+                        {index + 1}. {event.name}
+                      </Box>
+                      <Box
+                        display="flex"
+                        justifyContent="space-between"
+                        color="gray.500"
+                        fontSize="sm"
+                        marginBottom="2"
+                      >
+                        <Box>{event.venue}</Box>
+                        <Box marginLeft="auto" paddingLeft="2">
+                          {event.time}
+                        </Box>
                       </Box>
                     </Box>
                   </Box>
-                </Box>
+                </Tooltip>
               ))}
         </Box>
 
