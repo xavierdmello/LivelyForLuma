@@ -41,6 +41,7 @@ export const SignIn = () => {
   const livelyZAddress = process.env.NEXT_PUBLIC_LIVELYZ as `0x${string}`;
   const [sortCategory, setSortCategory] = useState("overall");
 
+  console.log("LivelyZAddress", livelyZAddress);
   if (chain?.id === zircuitTestnet.id) {
     livelyAddress = livelyZAddress;
     console.log("Using Zircuit Testnet");
@@ -59,7 +60,7 @@ export const SignIn = () => {
 
   console.log("Data incoming")
   console.log(data);
-  
+
   const { isOpen, onOpen, onClose } = useDisclosure();
   const [selectedEventIndex, setSelectedEventIndex] = useState<number | null>(
     null
