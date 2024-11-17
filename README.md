@@ -1,4 +1,4 @@
-JUST ONE MORE SIDE EVENT BRO.
+## JUST ONE MORE SIDE EVENT BRO.
 
 As chronic crypto conference attendees and hackers, we all know the Luma side event pain too well. Our calendars are way too cluttered, there are 5 bajillion side events happening at the same time, and we’re probably spending more time trying to decide what event to go to than actually enjoying the event itself. There’s no easy way to put it - the Luma side event experience is COOKED.
 
@@ -30,6 +30,11 @@ The frontend was built with Chakra UI, Next.js, and React. We also used the Worl
 ## Deploy Stylus Contracts (Arbitrum)
 TODO
 
-## Blockscout Link
+## Arbitrum Deployment
 https://sepolia-explorer.arbitrum.io/address/0x2B911C14C94cD3628FA6312Da70Fa706284C631B
+https://sepolia.arbiscan.io/address/0x2B911C14C94cD3628FA6312Da70Fa706284C631B
+
+## Zircuit Deployment
+https://explorer.testnet.zircuit.com/address/0xf83e6AF69B226d9446fB8C17CA9f258b91F0202D
+
 
