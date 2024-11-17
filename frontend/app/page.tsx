@@ -1,7 +1,6 @@
 import { Box, chakra, Container } from "@chakra-ui/react";
-import { PayBlock } from "@/components/Pay";
 import { SignIn } from "@/components/SignIn";
-import { VerifyBlock } from "@/components/Verify";
+
 
 import { Image  } from "@chakra-ui/react";
 import 'mapbox-gl/dist/mapbox-gl.css';
