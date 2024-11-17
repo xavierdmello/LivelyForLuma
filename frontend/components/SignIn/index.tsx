@@ -8,14 +8,24 @@ import { useReadContract, useWriteContract, useWaitForTransactionReceipt } from 
 import "mapbox-gl/dist/mapbox-gl.css";
 import { useEffect, useRef, useState } from "react";
 import abi from "../../public/abi";
+import { zircuitTestnet } from "viem/chains";
 
 export const SignIn = () => {
   const { address, isConnected, chain } = useAccount();
   const { data: session } = useSession();
   const mapRef = useRef<mapboxgl.Map | null>(null);
   const mapContainerRef = useRef<HTMLDivElement | null>(null);
-  const livelyAddress = process.env.NEXT_PUBLIC_LIVELY as `0x${string}`;
+  let livelyAddress = process.env.NEXT_PUBLIC_LIVELY as `0x${string}`;
+  const livelyZAddress = process.env.NEXT_PUBLIC_LIVELYZ as `0x${string}`;
   const [sortCategory, setSortCategory] = useState("overall");
+
+  if (chain?.id === zircuitTestnet.id) {
+    livelyAddress = livelyZAddress;
+    console.log("Using Zircuit Testnet");
+  } else {
+    console.log("Using Arbitrum Sepolia");
+  }
+
 
   const { data: data } = useReadContract({
     address: livelyAddress,
