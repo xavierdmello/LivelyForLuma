@@ -266,7 +266,15 @@ export const SignIn = () => {
                           {event.time}
                         </Box>
                       </Box>
-                      <Button onClick={() => { setSelectedEventIndex(index); onOpen(); }}>Rate</Button>
+                      <Button
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          setSelectedEventIndex(index);
+                          onOpen();
+                        }}
+                      >
+                        Rate
+                      </Button>
                     </Box>
                   </Box>
                 </Tooltip>
