@@ -26,7 +26,6 @@ export const SignIn = () => {
     console.log("Using Arbitrum Sepolia");
   }
 
-
   const { data: data } = useReadContract({
     address: livelyAddress,
     abi: abi,
@@ -204,6 +203,11 @@ export const SignIn = () => {
         <Button onClick={() => signIn('worldcoin')}>Sign in with Worldcoin</Button>
       </Box>
     );
+  }
+
+  // Check if address is available
+  if (!address) {
+    return null; // or any placeholder component if you prefer
   }
 
   return (
