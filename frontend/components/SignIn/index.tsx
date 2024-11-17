@@ -241,7 +241,7 @@ export const SignIn = () => {
   }
 
   // Check if address is available
-  if (!address && session) {
+  if (session && !address ) {
     return <DynamicWidget />; // or any placeholder component if you prefer
   }
 
