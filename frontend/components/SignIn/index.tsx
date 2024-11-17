@@ -59,6 +59,7 @@ export const SignIn = () => {
 
   console.log("Data incoming")
   console.log(data);
+  
   const { isOpen, onOpen, onClose } = useDisclosure();
   const [selectedEventIndex, setSelectedEventIndex] = useState<number | null>(
     null
