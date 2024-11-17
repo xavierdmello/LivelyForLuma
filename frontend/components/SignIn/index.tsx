@@ -173,7 +173,21 @@ export const SignIn = () => {
           {data &&
             data
               // @ts-ignore: Suppress implicit 'any' type error
-              .sort((a, b) => b.stats.overall - a.stats.overall)
+              .sort((a, b) => {
+                switch (sortCategory) {
+                  case 'food':
+                    return b.stats.food - a.stats.food;
+                  case 'technical':
+                    return b.stats.technical - a.stats.technical;
+                  case 'networking':
+                    return b.stats.networking - a.stats.networking;
+                  case 'swag':
+                    return b.stats.swag - a.stats.swag;
+                  case 'overall':
+                  default:
+                    return b.stats.overall - a.stats.overall;
+                }
+              })
               // @ts-ignore: Suppress implicit 'any' type error
               .map((event, index) => (
                 <Box
