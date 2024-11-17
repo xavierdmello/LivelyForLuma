@@ -36,6 +36,7 @@ export const SignIn = () => {
 
   const handleSubmit = async () => {
     if (selectedEventIndex !== null) {
+      console.log({selectedEventIndex, overallVote, foodVote, technicalVote, networkingVote, funVote, swagVote});
       writeContract({
         address: livelyAddress, // Replace with your contract address
         abi,
