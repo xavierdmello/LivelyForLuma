@@ -31,6 +31,7 @@ export const SignIn = () => {
   const [networkingVote, setNetworkingVote] = useState("0");
   const [funVote, setFunVote] = useState("0");
   const [swagVote, setSwagVote] = useState("0");
+  const [originalIndices, setOriginalIndices] = useState<number[]>([]);
 
   const { data: hash, isPending, writeContract, error } = useWriteContract();
 
@@ -174,6 +175,13 @@ export const SignIn = () => {
     }
   }, [data]);
 
+  useEffect(() => {
+    if (data) {
+      // @ts-ignore
+      setOriginalIndices(data.map((_, index) => index));
+    }
+  }, [data]);
+
   return (
     <>
       <Box
@@ -207,6 +215,7 @@ export const SignIn = () => {
           {data &&
             data
               // @ts-ignore: Suppress implicit 'any' type error
+              .map((event, index) => ({ ...event, originalIndex: originalIndices[index] }))
               .sort((a, b) => {
                 switch (sortCategory) {
                   case 'food':
@@ -222,8 +231,7 @@ export const SignIn = () => {
                     return b.stats.overall - a.stats.overall;
                 }
               })
-              // @ts-ignore: Suppress implicit 'any' type error
-              .map((event, index) => (
+              .map((event, displayIndex) => (
                 <Tooltip
                   label={
                     <Box>
@@ -252,7 +260,8 @@ export const SignIn = () => {
                   p="2"
                 >
                   <Box
-                    id={`event-${index}`}
+                    id={`event-${displayIndex}`}
+                    // @ts-ignore
                     key={event.id}
                     display="flex"
                     flexDirection="row"
@@ -279,7 +288,7 @@ export const SignIn = () => {
                         marginBottom="2"
                         width="100%"
                       >
-                        {index + 1}. {event.name}
+                        {displayIndex + 1}. {event.name}
                       </Box>
                       <Box
                         display="flex"
@@ -296,7 +305,7 @@ export const SignIn = () => {
                       <Button
                         onClick={(e) => {
                           e.stopPropagation();
-                          setSelectedEventIndex(index);
+                          setSelectedEventIndex(event.originalIndex);
                           onOpen();
                         }}
                       >
