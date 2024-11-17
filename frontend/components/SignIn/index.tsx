@@ -37,17 +37,19 @@ export const SignIn = () => {
   const { data: session } = useSession();
   const mapRef = useRef<mapboxgl.Map | null>(null);
   const mapContainerRef = useRef<HTMLDivElement | null>(null);
-  let livelyAddress = process.env.NEXT_PUBLIC_LIVELY as `0x${string}`;
+  let livelyAddress: `0x${string}`;
   const livelyZAddress = process.env.NEXT_PUBLIC_LIVELYZ as `0x${string}`;
   const [sortCategory, setSortCategory] = useState("overall");
 
+  let NEXT_PUBLIC_LIVELY="0x2B911C14C94cD3628FA6312Da70Fa706284C631B" as `0x${string}`
+  let NEXT_PUBLIC_LIVELYZ="0xf83e6AF69B226d9446fB8C17CA9f258b91F0202D" as `0x${string}`
+
   console.log("LivelyZAddress", livelyZAddress);
   if (chain?.id === zircuitTestnet.id) {
-    livelyAddress = livelyZAddress;
-    console.log("Using Zircuit Testnet");
+    livelyAddress = NEXT_PUBLIC_LIVELYZ;
     
   } else {
-    console.log("Using Arbitrum Sepolia");
+    livelyAddress = NEXT_PUBLIC_LIVELY;
   }
 
   console.log(livelyAddress);
