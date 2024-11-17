@@ -31,7 +31,7 @@ The frontend was built with Chakra UI, Next.js, and React. We also used the Worl
 TODO
 
 ## Arbitrum Deployment
-https://sepolia-explorer.arbitrum.io/address/0x2B911C14C94cD3628FA6312Da70Fa706284C631B
+https://sepolia-explorer.arbitrum.io/address/0x442863c4393631f06d7D00AF722EacDDE3A6c100
 https://sepolia.arbiscan.io/address/0x2B911C14C94cD3628FA6312Da70Fa706284C631B
 
 ## Zircuit Deployment
