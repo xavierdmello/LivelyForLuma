@@ -193,11 +193,21 @@ export const SignIn = () => {
                 <Tooltip
                   label={
                     <Box>
-                      <Box>Food: <Progress value={event.stats.food} max={10} size="xs" colorScheme="pink" /></Box>
-                      <Box>Technical: <Progress value={event.stats.technical} max={10} size="xs" colorScheme="blue" /></Box>
-                      <Box>Networking: <Progress value={event.stats.networking} max={10} size="xs" colorScheme="green" /></Box>
-                      <Box>Swag: <Progress value={event.stats.swag} max={10} size="xs" colorScheme="purple" /></Box>
-                      <Box>Overall: <Progress value={event.stats.overall} max={10} size="xs" colorScheme="orange" /></Box>
+                      <Box>
+                        Food: <Progress value={event.stats.food} max={10} size="xs" colorScheme="pink" /> {event.stats.food}
+                      </Box>
+                      <Box>
+                        Technical: <Progress value={event.stats.technical} max={10} size="xs" colorScheme="blue" /> {event.stats.technical}
+                      </Box>
+                      <Box>
+                        Networking: <Progress value={event.stats.networking} max={10} size="xs" colorScheme="green" /> {event.stats.networking}
+                      </Box>
+                      <Box>
+                        Swag: <Progress value={event.stats.swag} max={10} size="xs" colorScheme="purple" /> {event.stats.swag}
+                      </Box>
+                      <Box>
+                        Overall: <Progress value={event.stats.overall} max={10} size="xs" colorScheme="orange" /> {event.stats.overall}
+                      </Box>
                     </Box>
                   }
                   placement="top"
