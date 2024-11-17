@@ -22,13 +22,14 @@ import {
 
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { http } from 'viem';
-import { mainnet, arbitrumSepolia } from 'viem/chains';
+import { mainnet, arbitrumSepolia, zircuitTestnet } from 'viem/chains';
 
 const config = createConfig({
-  chains: [arbitrumSepolia],
+  chains: [arbitrumSepolia, zircuitTestnet],
   multiInjectedProviderDiscovery: false,
   transports: {
     [arbitrumSepolia.id]: http(),
+    [zircuitTestnet.id]: http(),
   },
 });
 
