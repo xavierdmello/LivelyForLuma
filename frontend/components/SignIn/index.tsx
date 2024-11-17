@@ -97,6 +97,7 @@ export const SignIn = () => {
 
           // Add markers if data is available
           if (data) {
+            // @ts-ignore
             data.forEach((event, index) => {
               const marker = new mapboxgl.Marker()
                 .setLngLat([parseFloat(event.long), parseFloat(event.lat)])
