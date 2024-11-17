@@ -48,32 +48,27 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <NextAuthProvider>
-      <ChakraProvider>
-        <ErudaProvider>
+        <ChakraProvider>
+          <ErudaProvider>
+            <MiniKitProvider>
+              <DynamicContextProvider
+                settings={{
+                  // Find your environment id at https://app.dynamic.xyz/dashboard/developer
+                  environmentId: "7723e1a1-da6d-4a2b-82a9-66e56e80b010",
 
-          <MiniKitProvider>
-          <DynamicContextProvider
-      settings={{
-        // Find your environment id at https://app.dynamic.xyz/dashboard/developer
-        environmentId: "588cc0c4-95ab-4f60-85dd-1deb799ec822",
-        
-        walletConnectors: [EthereumWalletConnectors],
-      }}
-    >
-          <WagmiProvider config={config}>
-        <QueryClientProvider client={queryClient}>
-          <DynamicWagmiConnector>
-       
-     
-              <body className={inter.className}>{children}</body>
-            
-            </DynamicWagmiConnector>
-        </QueryClientProvider>
-      </WagmiProvider>
-            </DynamicContextProvider>
-          </MiniKitProvider>
-    
-        </ErudaProvider>
+                  walletConnectors: [EthereumWalletConnectors],
+                }}
+              >
+                <WagmiProvider config={config}>
+                  <QueryClientProvider client={queryClient}>
+                    <DynamicWagmiConnector>
+                      <body className={inter.className}>{children}</body>
+                    </DynamicWagmiConnector>
+                  </QueryClientProvider>
+                </WagmiProvider>
+              </DynamicContextProvider>
+            </MiniKitProvider>
+          </ErudaProvider>
         </ChakraProvider>
       </NextAuthProvider>
     </html>
