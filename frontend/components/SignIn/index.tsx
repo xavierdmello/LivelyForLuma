@@ -1,10 +1,32 @@
 "use client";
 import { signIn, signOut, useSession } from "next-auth/react";
-import { Button, Image, Select, Tooltip, Progress, useDisclosure, Modal, ModalOverlay, ModalContent, ModalHeader, ModalFooter, ModalBody, ModalCloseButton, RadioGroup, Stack, Radio, Box } from "@chakra-ui/react";
+import {
+  Button,
+  Image,
+  Select,
+  Tooltip,
+  Progress,
+  useDisclosure,
+  Modal,
+  ModalOverlay,
+  ModalContent,
+  ModalHeader,
+  ModalFooter,
+  ModalBody,
+  ModalCloseButton,
+  RadioGroup,
+  Stack,
+  Radio,
+  Box,
+} from "@chakra-ui/react";
 import { DynamicWidget } from "@dynamic-labs/sdk-react-core";
 import { useAccount } from "wagmi";
 import mapboxgl from "mapbox-gl";
-import { useReadContract, useWriteContract, useWaitForTransactionReceipt } from "wagmi";
+import {
+  useReadContract,
+  useWriteContract,
+  useWaitForTransactionReceipt,
+} from "wagmi";
 import "mapbox-gl/dist/mapbox-gl.css";
 import { useEffect, useRef, useState } from "react";
 import abi from "../../public/abi";
@@ -33,7 +55,9 @@ export const SignIn = () => {
   });
 
   const { isOpen, onOpen, onClose } = useDisclosure();
-  const [selectedEventIndex, setSelectedEventIndex] = useState<number | null>(null);
+  const [selectedEventIndex, setSelectedEventIndex] = useState<number | null>(
+    null
+  );
   const [overallVote, setOverallVote] = useState("0");
   const [foodVote, setFoodVote] = useState("0");
   const [technicalVote, setTechnicalVote] = useState("0");
@@ -46,7 +70,15 @@ export const SignIn = () => {
 
   const handleSubmit = async () => {
     if (selectedEventIndex !== null) {
-      console.log({selectedEventIndex, overallVote, foodVote, technicalVote, networkingVote, funVote, swagVote});
+      console.log({
+        selectedEventIndex,
+        overallVote,
+        foodVote,
+        technicalVote,
+        networkingVote,
+        funVote,
+        swagVote,
+      });
       writeContract({
         address: livelyAddress, // Replace with your contract address
         abi,
@@ -64,9 +96,10 @@ export const SignIn = () => {
     }
   };
 
-  const { isLoading: isConfirming, isSuccess: isConfirmed } = useWaitForTransactionReceipt({
-    hash,
-  });
+  const { isLoading: isConfirming, isSuccess: isConfirmed } =
+    useWaitForTransactionReceipt({
+      hash,
+    });
 
   useEffect(() => {
     if (mapContainerRef.current) {
@@ -200,14 +233,16 @@ export const SignIn = () => {
         justifyContent="center"
         alignItems="center"
       >
-        <Button onClick={() => signIn('worldcoin')}>Sign in with Worldcoin</Button>
+        <Button onClick={() => signIn("worldcoin")}>
+          Sign in with Worldcoin
+        </Button>
       </Box>
     );
   }
 
   // Check if address is available
-  if (!address) {
-    return null; // or any placeholder component if you prefer
+  if (!address && session) {
+    return <DynamicWidget />; // or any placeholder component if you prefer
   }
 
   return (
@@ -243,18 +278,21 @@ export const SignIn = () => {
           {data &&
             data
               // @ts-ignore: Suppress implicit 'any' type error
-              .map((event, index) => ({ ...event, originalIndex: originalIndices[index] }))
+              .map((event, index) => ({
+                ...event,
+                originalIndex: originalIndices[index],
+              }))
               .sort((a, b) => {
                 switch (sortCategory) {
-                  case 'food':
+                  case "food":
                     return b.stats.food - a.stats.food;
-                  case 'technical':
+                  case "technical":
                     return b.stats.technical - a.stats.technical;
-                  case 'networking':
+                  case "networking":
                     return b.stats.networking - a.stats.networking;
-                  case 'swag':
+                  case "swag":
                     return b.stats.swag - a.stats.swag;
-                  case 'overall':
+                  case "overall":
                   default:
                     return b.stats.overall - a.stats.overall;
                 }
@@ -264,19 +302,54 @@ export const SignIn = () => {
                   label={
                     <Box>
                       <Box>
-                        Food: <Progress value={event.stats.food} max={10} size="xs" colorScheme="pink" /> {event.stats.food}
+                        Food:{" "}
+                        <Progress
+                          value={event.stats.food}
+                          max={10}
+                          size="xs"
+                          colorScheme="pink"
+                        />{" "}
+                        {event.stats.food}
                       </Box>
                       <Box>
-                        Technical: <Progress value={event.stats.technical} max={10} size="xs" colorScheme="blue" /> {event.stats.technical}
+                        Technical:{" "}
+                        <Progress
+                          value={event.stats.technical}
+                          max={10}
+                          size="xs"
+                          colorScheme="blue"
+                        />{" "}
+                        {event.stats.technical}
                       </Box>
                       <Box>
-                        Networking: <Progress value={event.stats.networking} max={10} size="xs" colorScheme="green" /> {event.stats.networking}
+                        Networking:{" "}
+                        <Progress
+                          value={event.stats.networking}
+                          max={10}
+                          size="xs"
+                          colorScheme="green"
+                        />{" "}
+                        {event.stats.networking}
                       </Box>
                       <Box>
-                        Swag: <Progress value={event.stats.swag} max={10} size="xs" colorScheme="purple" /> {event.stats.swag}
+                        Swag:{" "}
+                        <Progress
+                          value={event.stats.swag}
+                          max={10}
+                          size="xs"
+                          colorScheme="purple"
+                        />{" "}
+                        {event.stats.swag}
                       </Box>
                       <Box>
-                        Overall: <Progress value={event.stats.overall} max={10} size="xs" colorScheme="orange" /> {event.stats.overall}
+                        Overall:{" "}
+                        <Progress
+                          value={event.stats.overall}
+                          max={10}
+                          size="xs"
+                          colorScheme="orange"
+                        />{" "}
+                        {event.stats.overall}
                       </Box>
                     </Box>
                   }
@@ -434,7 +507,7 @@ export const SignIn = () => {
               onClick={handleSubmit}
               disabled={isPending}
             >
-              {isPending ? 'Submitting...' : 'Submit'}
+              {isPending ? "Submitting..." : "Submit"}
             </Button>
             {hash && <div>Transaction Hash: {hash}</div>}
             {isConfirming && <div>Waiting for confirmation...</div>}
