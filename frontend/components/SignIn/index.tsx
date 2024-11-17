@@ -182,6 +182,20 @@ export const SignIn = () => {
     }
   }, [data]);
 
+  if (!session) {
+    return (
+      <Box
+        width="100%"
+        height="100vh"
+        display="flex"
+        justifyContent="center"
+        alignItems="center"
+      >
+        <Button onClick={() => signIn('worldcoin')}>Sign in with Worldcoin</Button>
+      </Box>
+    );
+  }
+
   return (
     <>
       <Box
