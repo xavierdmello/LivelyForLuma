@@ -1,7 +1,7 @@
 "use client";
 import { signIn, signOut, useSession } from "next-auth/react";
 
-import { Button, Image, Select, Tooltip, Progress } from "@chakra-ui/react";
+import { Button, Image, Select, Tooltip, Progress, useDisclosure, Modal, ModalOverlay, ModalContent, ModalHeader, ModalFooter, ModalBody, ModalCloseButton, RadioGroup, Stack, Radio } from "@chakra-ui/react";
 import { DynamicWidget } from "@dynamic-labs/sdk-react-core";
 import { useAccount } from "wagmi";
 import { Box } from "@chakra-ui/react";
@@ -24,6 +24,9 @@ export const SignIn = () => {
     abi: abi,
     functionName: "getAllEvents",
   });
+
+  const { isOpen, onOpen, onClose } = useDisclosure();
+  const [selectedEventIndex, setSelectedEventIndex] = useState<number | null>(null);
 
   useEffect(() => {
     if (mapContainerRef.current) {
@@ -259,6 +262,7 @@ export const SignIn = () => {
                           {event.time}
                         </Box>
                       </Box>
+                      <Button onClick={() => { setSelectedEventIndex(index); onOpen(); }}>Rate</Button>
                     </Box>
                   </Box>
                 </Tooltip>
@@ -278,7 +282,63 @@ export const SignIn = () => {
           overflow="hidden"
         />
       </Box>
-    </> 
+
+      {/* Rating Modal */}
+      <Modal isOpen={isOpen} onClose={onClose}>
+        <ModalOverlay />
+        <ModalContent>
+          <ModalHeader>Rate Event</ModalHeader>
+          <ModalCloseButton />
+          <ModalBody>
+            <RadioGroup defaultValue="0">
+              <Stack direction="column">
+                <Box>
+                  Overall:
+                  <Radio value="1">Upvote</Radio>
+                  <Radio value="2">Downvote</Radio>
+                  <Radio value="0">No Vote</Radio>
+                </Box>
+                <Box>
+                  Food:
+                  <Radio value="1">Upvote</Radio>
+                  <Radio value="2">Downvote</Radio>
+                  <Radio value="0">No Vote</Radio>
+                </Box>
+                <Box>
+                  Technical:
+                  <Radio value="1">Upvote</Radio>
+                  <Radio value="2">Downvote</Radio>
+                  <Radio value="0">No Vote</Radio>
+                </Box>
+                <Box>
+                  Networking:
+                  <Radio value="1">Upvote</Radio>
+                  <Radio value="2">Downvote</Radio>
+                  <Radio value="0">No Vote</Radio>
+                </Box>
+                <Box>
+                  Fun:
+                  <Radio value="1">Upvote</Radio>
+                  <Radio value="2">Downvote</Radio>
+                  <Radio value="0">No Vote</Radio>
+                </Box>
+                <Box>
+                  Swag:
+                  <Radio value="1">Upvote</Radio>
+                  <Radio value="2">Downvote</Radio>
+                  <Radio value="0">No Vote</Radio>
+                </Box>
+              </Stack>
+            </RadioGroup>
+          </ModalBody>
+          <ModalFooter>
+            <Button colorScheme="blue" mr={3} onClick={onClose}>
+              Submit
+            </Button>
+          </ModalFooter>
+        </ModalContent>
+      </Modal>
+    </>
   );
 };
 
