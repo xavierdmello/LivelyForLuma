@@ -72,30 +72,30 @@ contract Lively {
         // Verify user is checked into event in Luma (eg. they actually attended)
         verifyAttendance(eventId, msg.sender);
 
-        Event storage event_ = events[eventId];
+     
         
         // Update overall rating (required)
         if (overallVote == 1) {
-            event_.stats.overall += 1;
+            events[eventId].stats.overall += 1;
         } else {
-            event_.stats.overall -= 1;
+            events[eventId].stats.overall -= 1;
         }
         
         // Update optional ratings
         if (foodVote != 0) {
-            event_.stats.food += (foodVote == 1) ? int8(1) : int8(-1);
+            events[eventId].stats.food += (foodVote == 1) ? int8(1) : int8(-1);
         }
         if (technicalVote != 0) {
-            event_.stats.technical += (technicalVote == 1) ? int8(1) : int8(-1);
+            events[eventId].stats.technical += (technicalVote == 1) ? int8(1) : int8(-1);
         }
         if (networkingVote != 0) {
-            event_.stats.networking += (networkingVote == 1) ? int8(1) : int8(-1);
+            events[eventId].stats.networking += (networkingVote == 1) ? int8(1) : int8(-1);
         }
         if (funVote != 0) {
-            event_.stats.fun += (funVote == 1) ? int8(1) : int8(-1);
+            events[eventId].stats.fun += (funVote == 1) ? int8(1) : int8(-1);
         }
         if (swagVote != 0) {
-            event_.stats.swag += (swagVote == 1) ? int8(1) : int8(-1);
+            events[eventId].stats.swag += (swagVote == 1) ? int8(1) : int8(-1);
         }
 
         hasRated[eventId][msg.sender] = true;
