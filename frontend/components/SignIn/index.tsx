@@ -4,7 +4,7 @@ import { Button, Image, Select, Tooltip, Progress, useDisclosure, Modal, ModalOv
 import { DynamicWidget } from "@dynamic-labs/sdk-react-core";
 import { useAccount } from "wagmi";
 import mapboxgl from "mapbox-gl";
-import { useReadContract } from "wagmi";
+import { useReadContract, useWriteContract, useWaitForTransactionReceipt } from "wagmi";
 import "mapbox-gl/dist/mapbox-gl.css";
 import { useEffect, useRef, useState } from "react";
 import abi from "../../public/abi";
@@ -31,6 +31,31 @@ export const SignIn = () => {
   const [networkingVote, setNetworkingVote] = useState("0");
   const [funVote, setFunVote] = useState("0");
   const [swagVote, setSwagVote] = useState("0");
+
+  const { data: hash, isPending, writeContract, error } = useWriteContract();
+
+  const handleSubmit = async () => {
+    if (selectedEventIndex !== null) {
+      writeContract({
+        address: livelyAddress, // Replace with your contract address
+        abi,
+        functionName: "rateEvent",
+        args: [
+          BigInt(selectedEventIndex),
+          parseInt(overallVote),
+          parseInt(foodVote),
+          parseInt(technicalVote),
+          parseInt(networkingVote),
+          parseInt(funVote),
+          parseInt(swagVote),
+        ],
+      });
+    }
+  };
+
+  const { isLoading: isConfirming, isSuccess: isConfirmed } = useWaitForTransactionReceipt({
+    hash,
+  });
 
   useEffect(() => {
     if (mapContainerRef.current) {
@@ -364,9 +389,18 @@ export const SignIn = () => {
             </RadioGroup>
           </ModalBody>
           <ModalFooter>
-            <Button colorScheme="blue" mr={3} onClick={onClose}>
-              Submit
+            <Button
+              colorScheme="blue"
+              mr={3}
+              onClick={handleSubmit}
+              disabled={isPending}
+            >
+              {isPending ? 'Submitting...' : 'Submit'}
             </Button>
+            {hash && <div>Transaction Hash: {hash}</div>}
+            {isConfirming && <div>Waiting for confirmation...</div>}
+            {isConfirmed && <div>Transaction confirmed.</div>}
+            {error && <div>Error: {error.message}</div>}
           </ModalFooter>
         </ModalContent>
       </Modal>
