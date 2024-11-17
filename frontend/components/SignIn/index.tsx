@@ -1,10 +1,8 @@
 "use client";
 import { signIn, signOut, useSession } from "next-auth/react";
-
-import { Button, Image, Select, Tooltip, Progress, useDisclosure, Modal, ModalOverlay, ModalContent, ModalHeader, ModalFooter, ModalBody, ModalCloseButton, RadioGroup, Stack, Radio } from "@chakra-ui/react";
+import { Button, Image, Select, Tooltip, Progress, useDisclosure, Modal, ModalOverlay, ModalContent, ModalHeader, ModalFooter, ModalBody, ModalCloseButton, RadioGroup, Stack, Radio, Box } from "@chakra-ui/react";
 import { DynamicWidget } from "@dynamic-labs/sdk-react-core";
 import { useAccount } from "wagmi";
-import { Box } from "@chakra-ui/react";
 import mapboxgl from "mapbox-gl";
 import { useReadContract } from "wagmi";
 import "mapbox-gl/dist/mapbox-gl.css";
@@ -27,6 +25,12 @@ export const SignIn = () => {
 
   const { isOpen, onOpen, onClose } = useDisclosure();
   const [selectedEventIndex, setSelectedEventIndex] = useState<number | null>(null);
+  const [overallVote, setOverallVote] = useState("0");
+  const [foodVote, setFoodVote] = useState("0");
+  const [technicalVote, setTechnicalVote] = useState("0");
+  const [networkingVote, setNetworkingVote] = useState("0");
+  const [funVote, setFunVote] = useState("0");
+  const [swagVote, setSwagVote] = useState("0");
 
   useEffect(() => {
     if (mapContainerRef.current) {
@@ -290,7 +294,7 @@ export const SignIn = () => {
           <ModalHeader>Rate Event</ModalHeader>
           <ModalCloseButton />
           <ModalBody>
-            <RadioGroup defaultValue="0">
+            <RadioGroup onChange={setOverallVote} value={overallVote}>
               <Stack direction="column">
                 <Box>
                   Overall:
@@ -298,30 +302,50 @@ export const SignIn = () => {
                   <Radio value="2">Downvote</Radio>
                   <Radio value="0">No Vote</Radio>
                 </Box>
+              </Stack>
+            </RadioGroup>
+            <RadioGroup onChange={setFoodVote} value={foodVote}>
+              <Stack direction="column">
                 <Box>
                   Food:
                   <Radio value="1">Upvote</Radio>
                   <Radio value="2">Downvote</Radio>
                   <Radio value="0">No Vote</Radio>
                 </Box>
+              </Stack>
+            </RadioGroup>
+            <RadioGroup onChange={setTechnicalVote} value={technicalVote}>
+              <Stack direction="column">
                 <Box>
                   Technical:
                   <Radio value="1">Upvote</Radio>
                   <Radio value="2">Downvote</Radio>
                   <Radio value="0">No Vote</Radio>
                 </Box>
+              </Stack>
+            </RadioGroup>
+            <RadioGroup onChange={setNetworkingVote} value={networkingVote}>
+              <Stack direction="column">
                 <Box>
                   Networking:
                   <Radio value="1">Upvote</Radio>
                   <Radio value="2">Downvote</Radio>
                   <Radio value="0">No Vote</Radio>
                 </Box>
+              </Stack>
+            </RadioGroup>
+            <RadioGroup onChange={setFunVote} value={funVote}>
+              <Stack direction="column">
                 <Box>
                   Fun:
                   <Radio value="1">Upvote</Radio>
                   <Radio value="2">Downvote</Radio>
                   <Radio value="0">No Vote</Radio>
                 </Box>
+              </Stack>
+            </RadioGroup>
+            <RadioGroup onChange={setSwagVote} value={swagVote}>
+              <Stack direction="column">
                 <Box>
                   Swag:
                   <Radio value="1">Upvote</Radio>
