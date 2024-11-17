@@ -44,9 +44,12 @@ export const SignIn = () => {
   if (chain?.id === zircuitTestnet.id) {
     livelyAddress = livelyZAddress;
     console.log("Using Zircuit Testnet");
+    
   } else {
     console.log("Using Arbitrum Sepolia");
   }
+
+  console.log(livelyAddress);
 
   const { data: data } = useReadContract({
     address: livelyAddress,
@@ -54,6 +57,8 @@ export const SignIn = () => {
     functionName: "getAllEvents",
   });
 
+  console.log("Data incoming")
+  console.log(data);
   const { isOpen, onOpen, onClose } = useDisclosure();
   const [selectedEventIndex, setSelectedEventIndex] = useState<number | null>(
     null
