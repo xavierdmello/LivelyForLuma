@@ -1,3 +1,5 @@
+[![default](https://github.com/user-attachments/assets/1d038ff8-4685-43ee-832b-8ebf9e7375cd)](https://ethglobal.com/showcase/lively-for-luma-du8kj)
+
 More info: https://ethglobal.com/showcase/lively-for-luma-du8kj
 
 ## JUST ONE MORE SIDE EVENT BRO.
