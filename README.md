@@ -1,3 +1,5 @@
+https://ethglobal.com/showcase/lively-for-luma-du8kj
+
 ## JUST ONE MORE SIDE EVENT BRO.
 
 As chronic crypto conference attendees and hackers, we all know the Luma side event pain too well. Our calendars are way too cluttered, there are 5 bajillion side events happening at the same time, and we’re probably spending more time trying to decide what event to go to than actually enjoying the event itself. There’s no easy way to put it - the Luma side event experience is COOKED.
