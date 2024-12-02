@@ -1,4 +1,4 @@
-https://ethglobal.com/showcase/lively-for-luma-du8kj
+More info: https://ethglobal.com/showcase/lively-for-luma-du8kj
 
 ## JUST ONE MORE SIDE EVENT BRO.
 
